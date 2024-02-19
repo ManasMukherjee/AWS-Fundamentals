@@ -1,0 +1,9 @@
+# To check the instance metadata version (IMDS)
+# Ref URL - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-retrieval.html
+
+# If below code works then IMDSv1 is enabled
+curl http://169.254.169.254/latest/meta-data/
+
+# If below code works then IMDSv2 is enabled
+TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` \
+&& curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
